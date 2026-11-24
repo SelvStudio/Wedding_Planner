@@ -1,0 +1,2255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Planner — Fajar Sidiq &amp; Selviana Nurhidayah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    window.tailwind = window.tailwind || {};
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: '#FAF8F5',
+            beige: '#F3EDE2',
+            champagne: '#C5A059',
+            champagneDark: '#A6833E',
+            espresso: '#2C221E',
+            mocha: '#5E4E46',
+            sand: '#E6DEC8'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --ivory: #FAF8F5;
+      --beige: #F3EDE2;
+      --champagne: #C5A059;
+      --champagne-dark: #A6833E;
+      --espresso: #2C221E;
+      --mocha: #5E4E46;
+      --sand: #E6DEC8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--ivory);
+      color: var(--espresso);
+      line-height: 1.5;
+    }
+    h1, h2, h3, .font-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .hidden { display: none !important; }
+    .card-luxury {
+      background: #ffffff;
+      border: 1px solid var(--sand);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px -12px rgba(44, 34, 30, 0.10);
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #C5A059 0%, #A6833E 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.55rem 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .btn-gold:hover { opacity: 0.94; transform: translateY(-1px); }
+    .btn-outline {
+      background: #ffffff;
+      color: var(--espresso);
+      border: 1px solid var(--sand);
+      border-radius: 10px;
+      padding: 0.55rem 1rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .btn-outline:hover { background: var(--beige); }
+    .input-lux {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--sand);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--espresso);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .input-lux:focus {
+      border-color: var(--champagne);
+      box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18);
+    }
+    .nav-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--mocha);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-btn:hover { background: var(--beige); color: var(--espresso); }
+    .nav-btn.active {
+      background: linear-gradient(135deg, #C5A059 0%, #A6833E 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 16px -6px rgba(166, 131, 62, 0.55);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 34, 30, 0.55);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 60;
+    }
+    .toast {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      background: var(--espresso);
+      color: #fff;
+      padding: 0.75rem 1.15rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--champagne);
+      font-size: 0.875rem;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+      z-index: 80;
+    }
+    /* Responsive fallback grid if Tailwind CDN is slow */
+    .app-shell { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 270px;
+      flex-shrink: 0;
+      background: #ffffff;
+      border-right: 1px solid var(--sand);
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem;
+    }
+    .main-area { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    @media (max-width: 960px) {
+      .sidebar {
+        position: fixed;
+        left: 0; top: 0; bottom: 0;
+        z-index: 50;
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+      }
+      .sidebar.open { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- EMBEDDED DEFAULT CLOUD CONFIG (diisi otomatis saat export index.html) -->
+  <script id="embedded-cloud-config" type="application/json">
+    {
+      "databaseURL": "",
+      "workspaceId": "fajar-selviana-2026"
+    }
+  </script>
+
+  <!-- ==================== 1. PUBLIC INVITATION MODE (?undangan=1) ==================== -->
+  <div id="public-invitation-view" class="hidden min-h-screen py-8 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div id="public-invite-card" class="card-luxury p-6 md:p-10 text-center relative overflow-hidden"></div>
+      <div class="mt-6 text-center">
+        <button onclick="exitPublicInviteMode()" class="text-xs underline text-mocha hover:text-espresso">
+          Masuk ke Dashboard Wedding Planner (Fajar &amp; Selviana)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. COLLABORATIVE LOGIN GATE ==================== -->
+  <div id="login-gate" class="min-h-screen flex items-center justify-center p-4 bg-ivory">
+    <div class="card-luxury max-w-md w-full p-7 md:p-8">
+      <div class="text-center mb-6">
+        <span class="badge bg-beige text-champagneDark border border-sand mb-3">Luxury Wedding Workspace</span>
+        <h1 class="text-3xl font-serif font-semibold text-espresso">Fajar &amp; Selviana</h1>
+        <p class="text-sm text-mocha mt-1">Wedding Planner Kolaboratif &amp; Real-Time</p>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-mocha mb-2">Pilih Identitas Pengguna</label>
+          <div class="grid grid-cols-1 gap-2" id="role-selector">
+            <button type="button" onclick="selectRole('Fajar Sidiq')" data-role="Fajar Sidiq" class="role-opt btn-outline flex items-center justify-between text-left px-4 py-3 border-champagne bg-beige">
+              <div>
+                <div class="font-semibold text-sm">Fajar Sidiq</div>
+                <div class="text-xs text-mocha">Calon Pengantin Pria</div>
+              </div>
+              <span class="text-champagneDark text-xs font-semibold">✓ Dipilih</span>
+            </button>
+            <button type="button" onclick="selectRole('Selviana Nurhidayah')" data-role="Selviana Nurhidayah" class="role-opt btn-outline flex items-center justify-between text-left px-4 py-3">
+              <div>
+                <div class="font-semibold text-sm">Selviana Nurhidayah</div>
+                <div class="text-xs text-mocha">Calon Pengantin Wanita</div>
+              </div>
+              <span class="text-champagneDark text-xs font-semibold hidden">✓ Dipilih</span>
+            </button>
+            <button type="button" onclick="selectRole('Keluarga / WO')" data-role="Keluarga / WO" class="role-opt btn-outline flex items-center justify-between text-left px-4 py-3">
+              <div>
+                <div class="font-semibold text-sm">Keluarga / WO</div>
+                <div class="text-xs text-mocha">Panitia &amp; Koordinator Acara</div>
+              </div>
+              <span class="text-champagneDark text-xs font-semibold hidden">✓ Dipilih</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-mocha mb-1">PIN Akses Workspace</label>
+          <input id="login-pin" type="password" inputmode="numeric" class="input-lux" placeholder="Masukkan PIN (default: 2026)" value="2026" />
+          <p id="login-error" class="text-xs text-red-600 mt-1 hidden">PIN salah. Gunakan PIN workspace Anda (default: 2026).</p>
+        </div>
+
+        <label class="flex items-center gap-2 text-xs text-mocha cursor-pointer">
+          <input id="remember-device" type="checkbox" checked class="rounded border-sand" />
+          Ingat sesi pada perangkat ini
+        </label>
+
+        <button type="button" onclick="handleLogin()" class="btn-gold w-full py-3 text-sm font-semibold">
+          Buka Wedding Planner
+        </button>
+
+        <div class="pt-3 border-t border-sand flex items-center justify-between text-xs text-mocha">
+          <button type="button" onclick="openCloudSetupModal()" class="underline hover:text-espresso">
+            Atur Cloud Sync / Firebase
+          </button>
+          <button type="button" onclick="enterPublicInviteMode()" class="underline hover:text-espresso">
+            Lihat Undangan Publik
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 3. MAIN APPLICATION SHELL ==================== -->
+  <div id="app-shell" class="app-shell hidden">
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebar-overlay" onclick="toggleSidebar(false)" class="fixed inset-0 bg-black/40 z-40 hidden md:hidden"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <div class="pb-4 mb-4 border-b border-sand">
+        <div class="text-xs uppercase tracking-widest text-champagneDark font-semibold">Wedding Planner</div>
+        <div class="text-xl font-serif font-bold text-espresso mt-0.5">Fajar &amp; Selviana</div>
+        <div class="text-xs text-mocha mt-1" id="sidebar-user-badge">Login sebagai: -</div>
+      </div>
+
+      <nav class="space-y-1 flex-1 overflow-y-auto" id="main-nav">
+        <button class="nav-btn active" data-tab="dashboard" onclick="switchTab('dashboard')"><span>✦</span> Dashboard</button>
+        <button class="nav-btn" data-tab="checklist" onclick="switchTab('checklist')"><span>☑</span> Checklist Persiapan</button>
+        <button class="nav-btn" data-tab="budget" onclick="switchTab('budget')"><span>◈</span> Anggaran &amp; Dana</button>
+        <button class="nav-btn" data-tab="guests" onclick="switchTab('guests')"><span>❖</span> Tamu &amp; RSVP</button>
+        <button class="nav-btn" data-tab="vendors" onclick="switchTab('vendors')"><span>❖</span> Vendor &amp; Termin</button>
+        <button class="nav-btn" data-tab="calendar" onclick="switchTab('calendar')"><span>◷</span> Kalender Acara</button>
+        <button class="nav-btn" data-tab="moodboard" onclick="switchTab('moodboard')"><span>✧</span> Galeri Inspirasi</button>
+        <button class="nav-btn" data-tab="invitation" onclick="switchTab('invitation')"><span>✉</span> Undangan Digital</button>
+      </nav>
+
+      <div class="pt-4 mt-4 border-t border-sand space-y-2">
+        <button onclick="openCloudSetupModal()" class="btn-outline w-full text-xs py-2 flex items-center justify-center gap-1.5">
+          <span>☁</span> Cloud Sync &amp; GitHub Setup
+        </button>
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="exportJSON()" class="btn-outline text-xs py-1.5">Export JSON</button>
+          <label class="btn-outline text-xs py-1.5 text-center cursor-pointer">
+            Import JSON
+            <input type="file" accept=".json" onchange="importJSON(event)" class="hidden" />
+          </label>
+        </div>
+        <div class="flex items-center justify-between pt-1">
+          <button onclick="resetDefaultData()" class="text-[11px] text-red-600 hover:underline">Reset Default</button>
+          <button onclick="logoutSession()" class="text-[11px] text-mocha hover:underline">Ganti User</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-area">
+      <!-- Top Header -->
+      <header class="bg-white/90 backdrop-blur border-b border-sand px-4 md:px-7 py-3.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-30">
+        <div class="flex items-center gap-3">
+          <button onclick="toggleSidebar(true)" class="md:hidden btn-outline px-2.5 py-1.5 text-sm">☰</button>
+          <div>
+            <h2 id="page-title" class="text-lg md:text-xl font-serif font-semibold text-espresso">Dashboard Pernikahan</h2>
+            <p id="header-event-subtitle" class="text-xs text-mocha">Memuat jadwal...</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <button id="sync-status-badge" onclick="openCloudSetupModal()" class="badge bg-amber-50 text-amber-800 border border-amber-200 cursor-pointer">
+            ● Mode Lokal (Offline)
+          </button>
+          <button onclick="openEventSettingsModal()" class="btn-outline text-xs py-1.5 px-3">
+            ⚙ Atur Acara &amp; PIN
+          </button>
+        </div>
+      </header>
+
+      <!-- Tab Content Container -->
+      <main class="p-4 md:p-7 max-w-7xl w-full mx-auto space-y-6">
+        <!-- TAB 1: DASHBOARD -->
+        <section id="tab-dashboard" class="tab-panel space-y-6"></section>
+
+        <!-- TAB 2: CHECKLIST -->
+        <section id="tab-checklist" class="tab-panel hidden space-y-5"></section>
+
+        <!-- TAB 3: BUDGET -->
+        <section id="tab-budget" class="tab-panel hidden space-y-5"></section>
+
+        <!-- TAB 4: GUESTS -->
+        <section id="tab-guests" class="tab-panel hidden space-y-5"></section>
+
+        <!-- TAB 5: VENDORS -->
+        <section id="tab-vendors" class="tab-panel hidden space-y-5"></section>
+
+        <!-- TAB 6: CALENDAR -->
+        <section id="tab-calendar" class="tab-panel hidden space-y-5"></section>
+
+        <!-- TAB 7: MOODBOARD -->
+        <section id="tab-moodboard" class="tab-panel hidden space-y-5"></section>
+
+        <!-- TAB 8: INVITATION -->
+        <section id="tab-invitation" class="tab-panel hidden space-y-5"></section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL CONTAINER ==================== -->
+  <div id="modal-root" class="modal-backdrop hidden" onclick="if(event.target===this) closeModal()">
+    <div id="modal-box" class="card-luxury w-full max-w-xl max-h-[90vh] overflow-y-auto p-6"></div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ==================== CONSTANTS & DEFAULT DATA ====================
+      const STORAGE_KEY = 'wedding_planner_fajar_selviana_v3';
+      const SESSION_KEY = 'wedding_planner_session_v3';
+      const CLOUD_CFG_KEY = 'wedding_planner_cloud_cfg_v3';
+
+      const CHECKLIST_CATEGORIES = [
+        'Administrasi/KUA',
+        'Venue & Katering',
+        'Busana & MUA',
+        'Dokumentasi',
+        'Dekorasi & Hiburan',
+        'Souvenir & Undangan'
+      ];
+
+      const GUEST_RELATIONS = [
+        'Keluarga Fajar',
+        'Keluarga Selviana',
+        'Rekan Kerja / Peruri',
+        'Teman Kuliah / UNPAM',
+        'Sahabat / Umum'
+      ];
+
+      function createDefaultData() {
+        return {
+          updatedAt: Date.now(),
+          updatedBy: 'Sistem',
+          event: {
+            groomName: 'Fajar Sidiq',
+            groomParents: 'Putra dari Bapak & Ibu Keluarga Fajar',
+            brideName: 'Selviana Nurhidayah',
+            brideParents: 'Putri dari Bapak & Ibu Keluarga Selviana',
+            weddingDate: '2026-12-20',
+            akadTime: '08:00 - 10:00 WIB',
+            resepsiTime: '11:00 - 15:00 WIB',
+            venueName: 'Grand Ballroom Karawang / Gedung Pertemuan',
+            venueAddress: 'Jl. Ahmad Yani No. 88, Karawang Barat, Jawa Barat',
+            pinCode: '2026',
+            budgetCeiling: 150000000,
+            inviteTheme: 'champagne',
+            quote: 'Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri supaya kamu merasa tenteram kepadanya.'
+          },
+          checklists: [
+            { id: 'chk1', title: 'Pengurusan berkas N1-N4 & pendaftaran KUA', category: 'Administrasi/KUA', dueDate: '2026-11-28', priority: 'Tinggi', pic: 'Fajar Sidiq', done: true },
+            { id: 'chk2', title: 'Survei & DP Venue + Paket Katering 500 porsi', category: 'Venue & Katering', dueDate: '2026-11-30', priority: 'Tinggi', pic: 'Bersama', done: true },
+            { id: 'chk3', title: 'Fitting perdana busana Akad & Resepsi', category: 'Busana & MUA', dueDate: '2026-12-05', priority: 'Tinggi', pic: 'Selviana Nurhidayah', done: false },
+            { id: 'chk4', title: 'Technical meeting tim foto, video & drone', category: 'Dokumentasi', dueDate: '2026-12-10', priority: 'Sedang', pic: 'Fajar Sidiq', done: false },
+            { id: 'chk5', title: 'Finalisasi layout pelaminan & sound system', category: 'Dekorasi & Hiburan', dueDate: '2026-12-12', priority: 'Sedang', pic: 'Bersama', done: false },
+            { id: 'chk6', title: 'Pemesanan 300 pcs souvenir & cetak undangan fisik', category: 'Souvenir & Undangan', dueDate: '2026-12-03', priority: 'Tinggi', pic: 'Selviana Nurhidayah', done: false }
+          ],
+          budgets: [
+            { id: 'bdg1', item: 'Venue & Katering Utama', category: 'Venue & Katering', estimate: 75000000, actual: 30000000, note: 'DP 40% sudah masuk' },
+            { id: 'bdg2', item: 'Dekorasi Pelaminan & Lighting', category: 'Dekorasi & Hiburan', estimate: 22000000, actual: 10000000, note: 'Booking fee' },
+            { id: 'bdg3', item: 'Busana Pengantin, Orang Tua & MUA', category: 'Busana & MUA', estimate: 18000000, actual: 5000000, note: 'Termasuk sewa beskap & kebaya' },
+            { id: 'bdg4', item: 'Foto, Video & Photobooth', category: 'Dokumentasi', estimate: 12000000, actual: 4000000, note: 'Paket full day' },
+            { id: 'bdg5', item: 'Souvenir, Undangan & Mahar', category: 'Souvenir & Undangan', estimate: 10000000, actual: 2500000, note: 'Order bertahap' }
+          ],
+          guests: [
+            { id: 'gst1', name: 'Bapak H. Ahmad & Keluarga', relation: 'Keluarga Fajar', pax: 4, rsvp: 'Hadir', phone: '081234567801', wish: 'Semoga lancar hingga hari H, samawa selalu.' },
+            { id: 'gst2', name: 'Ibu Hj. Siti & Keluarga', relation: 'Keluarga Selviana', pax: 3, rsvp: 'Hadir', phone: '081234567802', wish: 'Barakallah untuk Fajar dan Selviana!' },
+            { id: 'gst3', name: 'Tim Seksi Khazprokhir Peruri', relation: 'Rekan Kerja / Peruri', pax: 6, rsvp: 'Belum Konfirmasi', phone: '081234567803', wish: '' },
+            { id: 'gst4', name: 'Rekan Teknik Industri UNPAM', relation: 'Teman Kuliah / UNPAM', pax: 5, rsvp: 'Hadir', phone: '081234567804', wish: 'Selamat menempuh hidup baru bro Fajar & mbak Selvi!' },
+            { id: 'gst5', name: 'Sahabat Dekat Karawang', relation: 'Sahabat / Umum', pax: 2, rsvp: 'Belum Konfirmasi', phone: '081234567805', wish: '' }
+          ],
+          vendors: [
+            {
+              id: 'vnd1',
+              name: 'Aura Catering & Ballroom',
+              category: 'Venue & Katering',
+              contact: '0811-2233-4455',
+              contractTotal: 75000000,
+              payments: [
+                { id: 'pay1', label: 'Booking Fee / DP 1', amount: 30000000, dueDate: '2026-10-15', paid: true },
+                { id: 'pay2', label: 'Termin 2 (50%)', amount: 25000000, dueDate: '2026-12-01', paid: false },
+                { id: 'pay3', label: 'Pelunasan H-7', amount: 20000000, dueDate: '2026-12-13', paid: false }
+              ]
+            },
+            {
+              id: 'vnd2',
+              name: 'Lumina Bridal & MUA',
+              category: 'Busana & MUA',
+              contact: '0813-5566-7788',
+              contractTotal: 18000000,
+              payments: [
+                { id: 'pay4', label: 'DP Busana & Makeup', amount: 5000000, dueDate: '2026-11-01', paid: true },
+                { id: 'pay5', label: 'Pelunasan Fitting Final', amount: 13000000, dueDate: '2026-12-10', paid: false }
+              ]
+            }
+          ],
+          eventsCalendar: [
+            { id: 'cal1', date: '2026-12-01', time: '10:00', title: 'Pembayaran Termin 2 Catering', location: 'Transfer / Kantor Catering', note: 'Siapkan bukti transfer' },
+            { id: 'cal2', date: '2026-12-05', time: '14:00', title: 'Fitting Busana Akad & Resepsi', location: 'Lumina Bridal', note: 'Fajar & Selviana wajib hadir' },
+            { id: 'cal3', date: '2026-12-12', time: '16:00', title: 'Technical Meeting Seluruh Vendor', location: 'Grand Ballroom Karawang', note: 'Cek rundown & layout kursi' },
+            { id: 'cal4', date: '2026-12-20', time: '08:00', title: 'Akad Nikah & Resepsi Fajar & Selviana', location: 'Grand Ballroom Karawang', note: 'Hari Bahagia' }
+          ],
+          moodboard: [
+            { id: 'mb1', title: 'Pelaminan Ivory & Champagne Gold', category: 'Dekorasi', imageUrl: '', note: 'Bunga mawar putih, baby breath, aksen kayu hangat & lampu warm white.' },
+            { id: 'mb2', title: 'Busana Akad Sunda / Modern Ivory', category: 'Busana', imageUrl: '', note: 'Kebaya ivory payet lembut dengan beskap senada untuk Fajar.' },
+            { id: 'mb3', title: 'Meja Tamu & Welcome Sign Akrilik', category: 'Penerima Tamu', imageUrl: '', note: 'Tipografi serif emas dengan bingkai kayu minimalis.' }
+          ],
+          activityLogs: [
+            { id: 'log1', user: 'Sistem', action: 'Workspace pernikahan Fajar Sidiq & Selviana Nurhidayah siap digunakan.', time: Date.now() }
+          ]
+        };
+      }
+
+      // ==================== STATE & STORAGE ====================
+      let state = loadLocalState();
+      let currentUser = null;
+      let selectedLoginRole = 'Fajar Sidiq';
+      let currentTab = 'dashboard';
+      let checklistFilterCat = 'Semua';
+      let checklistFilterStatus = 'Semua';
+      let guestSearch = '';
+      let guestFilterRel = 'Semua';
+      let guestFilterRsvp = 'Semua';
+      let calMonth = new Date(state.event.weddingDate || '2026-12-20').getMonth();
+      let calYear = new Date(state.event.weddingDate || '2026-12-20').getFullYear();
+      let selectedCalDate = state.event.weddingDate || '2026-12-20';
+      let cloudConfig = loadCloudConfig();
+      let cloudEventSource = null;
+      let cloudPollTimer = null;
+      let cloudConnected = false;
+      let isApplyingRemote = false;
+
+      function loadLocalState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            const def = createDefaultData();
+            return {
+              ...def,
+              ...parsed,
+              event: { ...def.event, ...(parsed.event || {}) }
+            };
+          }
+        } catch (e) { console.warn('Local load fallback:', e); }
+        return createDefaultData();
+      }
+
+      function loadCloudConfig() {
+        let embedded = { databaseURL: '', workspaceId: 'fajar-selviana-2026' };
+        try {
+          const el = document.getElementById('embedded-cloud-config');
+          if (el && el.textContent.trim()) {
+            embedded = { ...embedded, ...JSON.parse(el.textContent) };
+          }
+        } catch (e) {}
+        try {
+          const saved = localStorage.getItem(CLOUD_CFG_KEY);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            return {
+              databaseURL: parsed.databaseURL || embedded.databaseURL || '',
+              workspaceId: parsed.workspaceId || embedded.workspaceId || 'fajar-selviana-2026'
+            };
+          }
+        } catch (e) {}
+        return embedded;
+      }
+
+      function saveState(actionLabel, skipCloudPush) {
+        state.updatedAt = Date.now();
+        state.updatedBy = currentUser || 'Tamu Undangan';
+        if (actionLabel) {
+          state.activityLogs = state.activityLogs || [];
+          state.activityLogs.unshift({
+            id: 'log_' + Date.now(),
+            user: state.updatedBy,
+            action: actionLabel,
+            time: Date.now()
+          });
+          if (state.activityLogs.length > 25) state.activityLogs = state.activityLogs.slice(0, 25);
+        }
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {}
+        if (!skipCloudPush && !isApplyingRemote && cloudConfig.databaseURL) {
+          pushStateToCloud();
+        }
+        renderActiveView();
+      }
+
+      // ==================== CLOUD SYNC ENGINE (FIREBASE RTDB REST + SSE) ====================
+      function normalizeDbUrl(url) {
+        return (url || '').trim().replace(/\/+$/, '');
+      }
+
+      function getCloudEndpoint() {
+        const base = normalizeDbUrl(cloudConfig.databaseURL);
+        const ws = (cloudConfig.workspaceId || 'fajar-selviana-2026').replace(/[^a-zA-Z0-9_-]/g, '');
+        if (!base) return '';
+        return `${base}/wedding_workspaces/${ws}.json`;
+      }
+
+      function updateSyncBadge(connected, label) {
+        cloudConnected = connected;
+        const badge = document.getElementById('sync-status-badge');
+        if (!badge) return;
+        if (connected) {
+          badge.className = 'badge bg-emerald-50 text-emerald-700 border border-emerald-200 cursor-pointer';
+          badge.textContent = '● ' + (label || 'Live Cloud Sync (Real-Time)');
+        } else {
+          badge.className = 'badge bg-amber-50 text-amber-800 border border-amber-200 cursor-pointer';
+          badge.textContent = '● ' + (label || 'Mode Lokal (Hubungkan Cloud)');
+        }
+      }
+
+      async function pushStateToCloud() {
+        const endpoint = getCloudEndpoint();
+        if (!endpoint) return;
+        try {
+          const res = await fetch(endpoint, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(state)
+          });
+          if (res.ok) {
+            updateSyncBadge(true, 'Live Cloud Sync (Real-Time)');
+          } else {
+            updateSyncBadge(false, 'Gagal Sync (Cek Rules Firebase)');
+          }
+        } catch (err) {
+          updateSyncBadge(false, 'Offline — Tersimpan Lokal');
+        }
+      }
+
+      function applyRemoteState(remoteData) {
+        if (!remoteData || typeof remoteData !== 'object') return;
+        if (remoteData.updatedAt && state.updatedAt && remoteData.updatedAt <= state.updatedAt) return;
+        isApplyingRemote = true;
+        try {
+          const def = createDefaultData();
+          state = {
+            ...def,
+            ...remoteData,
+            event: { ...def.event, ...(remoteData.event || {}) }
+          };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          renderActiveView();
+          if (!document.getElementById('public-invitation-view').classList.contains('hidden')) {
+            renderPublicInvitation();
+          }
+        } finally {
+          isApplyingRemote = false;
+        }
+      }
+
+      async function fetchCloudOnce() {
+        const endpoint = getCloudEndpoint();
+        if (!endpoint) return false;
+        try {
+          const res = await fetch(endpoint);
+          if (!res.ok) {
+            updateSyncBadge(false, 'Cek Rules / URL Firebase');
+            return false;
+          }
+          const data = await res.json();
+          if (data === null) {
+            // Inisialisasi workspace di cloud pertama kali
+            await pushStateToCloud();
+          } else {
+            applyRemoteState(data);
+          }
+          updateSyncBadge(true, 'Live Cloud Sync (Real-Time)');
+          return true;
+        } catch (e) {
+          updateSyncBadge(false, 'Mode Lokal (Offline)');
+          return false;
+        }
+      }
+
+      function startCloudSync() {
+        stopCloudSync();
+        const endpoint = getCloudEndpoint();
+        if (!endpoint) {
+          updateSyncBadge(false, 'Mode Lokal (Hubungkan Cloud)');
+          return;
+        }
+        fetchCloudOnce();
+
+        // Firebase RTDB native Server-Sent Events
+        try {
+          cloudEventSource = new EventSource(endpoint);
+          cloudEventSource.addEventListener('put', function (ev) {
+            try {
+              const payload = JSON.parse(ev.data);
+              if (payload && payload.path === '/' && payload.data) {
+                applyRemoteState(payload.data);
+              } else if (payload && payload.path === '/' && payload.data === null) {
+                pushStateToCloud();
+              } else {
+                fetchCloudOnce();
+              }
+              updateSyncBadge(true, 'Live Cloud Sync (Real-Time)');
+            } catch (e) {}
+          });
+          cloudEventSource.addEventListener('patch', function () {
+            fetchCloudOnce();
+          });
+          cloudEventSource.onerror = function () {
+            // Fallback ke polling ringan jika SSE ditutup browser/jaringan
+            if (cloudEventSource) {
+              cloudEventSource.close();
+              cloudEventSource = null;
+            }
+          };
+        } catch (e) {}
+
+        // Polling backup setiap 6 detik untuk menjamin sinkronisasi lintas jaringan
+        cloudPollTimer = setInterval(fetchCloudOnce, 6000);
+      }
+
+      function stopCloudSync() {
+        if (cloudEventSource) {
+          cloudEventSource.close();
+          cloudEventSource = null;
+        }
+        if (cloudPollTimer) {
+          clearInterval(cloudPollTimer);
+          cloudPollTimer = null;
+        }
+      }
+
+      // Sinkronisasi antar-tab pada browser yang sama
+      window.addEventListener('storage', function (e) {
+        if (e.key === STORAGE_KEY && e.newValue) {
+          try {
+            applyRemoteState(JSON.parse(e.newValue));
+          } catch (err) {}
+        }
+      });
+
+      // ==================== HELPERS ====================
+      function uid(prefix) {
+        return prefix + '_' + Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-4);
+      }
+      function esc(str) {
+        return String(str == null ? '' : str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+      function rp(num) {
+        return 'Rp ' + Number(num || 0).toLocaleString('id-ID');
+      }
+      function formatDateID(dateStr) {
+        if (!dateStr) return '-';
+        const d = new Date(dateStr + 'T00:00:00');
+        if (isNaN(d.getTime())) return dateStr;
+        return d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      }
+      function formatShortDate(dateStr) {
+        if (!dateStr) return '-';
+        const d = new Date(dateStr + 'T00:00:00');
+        if (isNaN(d.getTime())) return dateStr;
+        return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+      }
+      function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.remove('hidden');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.add('hidden'), 3000);
+      }
+      function copyText(text, msg) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => showToast(msg || 'Disalin ke clipboard!')).catch(() => fallbackCopy(text, msg));
+        } else {
+          fallbackCopy(text, msg);
+        }
+      }
+      function fallbackCopy(text, msg) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); showToast(msg || 'Disalin ke clipboard!'); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+
+      // ==================== AUTH & ROUTING ====================
+      window.selectRole = function (role) {
+        selectedLoginRole = role;
+        document.querySelectorAll('.role-opt').forEach(btn => {
+          const active = btn.getAttribute('data-role') === role;
+          btn.classList.toggle('border-champagne', active);
+          btn.classList.toggle('bg-beige', active);
+          const check = btn.querySelector('span');
+          if (check) check.classList.toggle('hidden', !active);
+        });
+      };
+
+      window.handleLogin = function () {
+        const pinInput = document.getElementById('login-pin').value.trim();
+        const expectedPin = (state.event && state.event.pinCode) ? String(state.event.pinCode) : '2026';
+        const err = document.getElementById('login-error');
+        if (pinInput !== expectedPin) {
+          err.classList.remove('hidden');
+          return;
+        }
+        err.classList.add('hidden');
+        currentUser = selectedLoginRole;
+        if (document.getElementById('remember-device').checked) {
+          localStorage.setItem(SESSION_KEY, JSON.stringify({ user: currentUser, pin: pinInput }));
+        } else {
+          localStorage.removeItem(SESSION_KEY);
+        }
+        enterAppShell();
+      };
+
+      window.logoutSession = function () {
+        localStorage.removeItem(SESSION_KEY);
+        currentUser = null;
+        document.getElementById('app-shell').classList.add('hidden');
+        document.getElementById('login-gate').classList.remove('hidden');
+      };
+
+      function enterAppShell() {
+        document.getElementById('login-gate').classList.add('hidden');
+        document.getElementById('public-invitation-view').classList.add('hidden');
+        document.getElementById('app-shell').classList.remove('hidden');
+        document.getElementById('sidebar-user-badge').textContent = 'Aktif: ' + currentUser;
+        startCloudSync();
+        renderActiveView();
+      }
+
+      window.enterPublicInviteMode = function () {
+        document.getElementById('login-gate').classList.add('hidden');
+        document.getElementById('app-shell').classList.add('hidden');
+        document.getElementById('public-invitation-view').classList.remove('hidden');
+        startCloudSync();
+        renderPublicInvitation();
+      };
+
+      window.exitPublicInviteMode = function () {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('undangan');
+        url.searchParams.delete('tamu');
+        window.history.replaceState({}, '', url.toString());
+        document.getElementById('public-invitation-view').classList.add('hidden');
+        if (currentUser) {
+          enterAppShell();
+        } else {
+          document.getElementById('login-gate').classList.remove('hidden');
+        }
+      };
+
+      window.toggleSidebar = function (open) {
+        const sb = document.getElementById('sidebar');
+        const ov = document.getElementById('sidebar-overlay');
+        if (open) {
+          sb.classList.add('open');
+          ov.classList.remove('hidden');
+        } else {
+          sb.classList.remove('open');
+          ov.classList.add('hidden');
+        }
+      };
+
+      window.switchTab = function (tab) {
+        currentTab = tab;
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === tab));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+        const target = document.getElementById('tab-' + tab);
+        if (target) target.classList.remove('hidden');
+        const titles = {
+          dashboard: 'Dashboard Pernikahan',
+          checklist: 'Checklist Persiapan',
+          budget: 'Manajemen Anggaran',
+          guests: 'Daftar Tamu & RSVP',
+          vendors: 'Vendor & Pembayaran Termin',
+          calendar: 'Kalender & Jadwal Acara',
+          moodboard: 'Galeri Inspirasi (Moodboard)',
+          invitation: 'Undangan Digital Publik'
+        };
+        document.getElementById('page-title').textContent = titles[tab] || 'Wedding Planner';
+        toggleSidebar(false);
+        renderActiveView();
+      };
+
+      function renderActiveView() {
+        document.getElementById('header-event-subtitle').textContent =
+          `${formatDateID(state.event.weddingDate)} • ${state.event.venueName}`;
+        if (currentTab === 'dashboard') renderDashboard();
+        else if (currentTab === 'checklist') renderChecklist();
+        else if (currentTab === 'budget') renderBudget();
+        else if (currentTab === 'guests') renderGuests();
+        else if (currentTab === 'vendors') renderVendors();
+        else if (currentTab === 'calendar') renderCalendar();
+        else if (currentTab === 'moodboard') renderMoodboard();
+        else if (currentTab === 'invitation') renderInvitationTab();
+      }
+
+      // ==================== LIVE COUNTDOWN ====================
+      function getCountdownParts() {
+        const target = new Date((state.event.weddingDate || '2026-12-20') + 'T08:00:00');
+        const diff = target.getTime() - Date.now();
+        if (diff <= 0) return { days: 0, hours: 0, mins: 0, secs: 0, passed: true };
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const mins = Math.floor((diff % 3600000) / 60000);
+        const secs = Math.floor((diff % 60000) / 1000);
+        return { days, hours, mins, secs, passed: false };
+      }
+
+      setInterval(function () {
+        const p = getCountdownParts();
+        document.querySelectorAll('[data-cd-days]').forEach(el => el.textContent = String(p.days).padStart(2, '0'));
+        document.querySelectorAll('[data-cd-hours]').forEach(el => el.textContent = String(p.hours).padStart(2, '0'));
+        document.querySelectorAll('[data-cd-mins]').forEach(el => el.textContent = String(p.mins).padStart(2, '0'));
+        document.querySelectorAll('[data-cd-secs]').forEach(el => el.textContent = String(p.secs).padStart(2, '0'));
+      }, 1000);
+
+      // ==================== 1. DASHBOARD ====================
+      function renderDashboard() {
+        const cd = getCountdownParts();
+        const doneTasks = state.checklists.filter(c => c.done).length;
+        const totalTasks = state.checklists.length;
+        const pctTasks = totalTasks ? Math.round((doneTasks / totalTasks) * 100) : 0;
+
+        const totalEst = state.budgets.reduce((s, b) => s + Number(b.estimate || 0), 0);
+        const totalAct = state.budgets.reduce((s, b) => s + Number(b.actual || 0), 0);
+        const ceiling = Number(state.event.budgetCeiling || 0);
+
+        const confirmedGuests = state.guests.filter(g => g.rsvp === 'Hadir');
+        const confirmedPax = confirmedGuests.reduce((s, g) => s + Number(g.pax || 1), 0);
+        const totalPax = state.guests.reduce((s, g) => s + Number(g.pax || 1), 0);
+
+        let vendorTotal = 0, vendorPaid = 0;
+        const unpaidTerms = [];
+        state.vendors.forEach(v => {
+          vendorTotal += Number(v.contractTotal || 0);
+          (v.payments || []).forEach(p => {
+            if (p.paid) vendorPaid += Number(p.amount || 0);
+            else unpaidTerms.push({ vendor: v.name, ...p });
+          });
+        });
+
+        const urgentTasks = state.checklists.filter(c => !c.done && (c.priority === 'Tinggi' || (c.dueDate && c.dueDate <= new Date().toISOString().slice(0, 10))));
+        const upcomingEvents = [...state.eventsCalendar]
+          .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))
+          .slice(0, 4);
+
+        const logs = (state.activityLogs || []).slice(0, 5);
+
+        document.getElementById('tab-dashboard').innerHTML = `
+          <!-- Hero Banner & Countdown -->
+          <div class="card-luxury p-6 md:p-8 bg-gradient-to-br from-espresso to-[#43332C] text-white border-0">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div>
+                <div class="text-xs uppercase tracking-[0.2em] text-champagne font-semibold">Menuju Hari Bahagia</div>
+                <h2 class="text-2xl md:text-4xl font-serif font-bold mt-1">${esc(state.event.groomName)} &amp; ${esc(state.event.brideName)}</h2>
+                <p class="text-sm text-sand mt-2">${formatDateID(state.event.weddingDate)} • ${esc(state.event.venueName)}</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  <button onclick="openEventSettingsModal()" class="btn-gold text-xs px-3.5 py-2">Edit Tanggal &amp; Lokasi</button>
+                  <button onclick="switchTab('invitation')" class="px-3.5 py-2 rounded-lg border border-champagne/50 text-xs text-ivory hover:bg-white/10">Bagikan Undangan Digital</button>
+                </div>
+              </div>
+              <div class="grid grid-cols-4 gap-2.5 sm:gap-3 text-center">
+                <div class="bg-white/10 rounded-xl px-3 py-3 min-w-[68px]">
+                  <div data-cd-days class="text-2xl md:text-3xl font-serif font-bold text-champagne">${String(cd.days).padStart(2, '0')}</div>
+                  <div class="text-[11px] text-sand uppercase">Hari</div>
+                </div>
+                <div class="bg-white/10 rounded-xl px-3 py-3 min-w-[68px]">
+                  <div data-cd-hours class="text-2xl md:text-3xl font-serif font-bold text-champagne">${String(cd.hours).padStart(2, '0')}</div>
+                  <div class="text-[11px] text-sand uppercase">Jam</div>
+                </div>
+                <div class="bg-white/10 rounded-xl px-3 py-3 min-w-[68px]">
+                  <div data-cd-mins class="text-2xl md:text-3xl font-serif font-bold text-champagne">${String(cd.mins).padStart(2, '0')}</div>
+                  <div class="text-[11px] text-sand uppercase">Menit</div>
+                </div>
+                <div class="bg-white/10 rounded-xl px-3 py-3 min-w-[68px]">
+                  <div data-cd-secs class="text-2xl md:text-3xl font-serif font-bold text-champagne">${String(cd.secs).padStart(2, '0')}</div>
+                  <div class="text-[11px] text-sand uppercase">Detik</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 KPI Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div class="card-luxury p-5">
+              <div class="text-xs font-semibold text-mocha uppercase">Progres Checklist</div>
+              <div class="text-2xl font-bold text-espresso mt-1">${pctTasks}% <span class="text-sm font-normal text-mocha">(${doneTasks}/${totalTasks})</span></div>
+              <div class="w-full h-2 bg-beige rounded-full mt-3 overflow-hidden">
+                <div class="h-full bg-champagne" style="width:${pctTasks}%"></div>
+              </div>
+            </div>
+            <div class="card-luxury p-5">
+              <div class="text-xs font-semibold text-mocha uppercase">Realisasi Anggaran</div>
+              <div class="text-2xl font-bold text-espresso mt-1">${rp(totalAct)}</div>
+              <div class="text-xs text-mocha mt-2">Plafon: ${rp(ceiling)} • Est: ${rp(totalEst)}</div>
+            </div>
+            <div class="card-luxury p-5">
+              <div class="text-xs font-semibold text-mocha uppercase">Konfirmasi Tamu</div>
+              <div class="text-2xl font-bold text-espresso mt-1">${confirmedPax} Pax <span class="text-sm font-normal text-mocha">Hadir</span></div>
+              <div class="text-xs text-mocha mt-2">Total terdata: ${state.guests.length} undangan (${totalPax} pax)</div>
+            </div>
+            <div class="card-luxury p-5">
+              <div class="text-xs font-semibold text-mocha uppercase">Pembayaran Vendor</div>
+              <div class="text-2xl font-bold text-espresso mt-1">${rp(vendorPaid)}</div>
+              <div class="text-xs text-mocha mt-2">Total kontrak: ${rp(vendorTotal)}</div>
+            </div>
+          </div>
+
+          <!-- Detail Panels -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div class="card-luxury p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-serif font-semibold text-lg">Pengingat Prioritas</h3>
+                <button onclick="switchTab('checklist')" class="text-xs text-champagneDark hover:underline">Lihat semua</button>
+              </div>
+              <div class="space-y-2">
+                ${urgentTasks.length ? urgentTasks.slice(0, 4).map(t => `
+                  <div class="p-3 rounded-xl bg-ivory border border-sand flex items-start justify-between gap-2">
+                    <div>
+                      <div class="text-sm font-medium text-espresso">${esc(t.title)}</div>
+                      <div class="text-xs text-mocha">${esc(t.category)} • Tenggat ${formatShortDate(t.dueDate)}</div>
+                    </div>
+                    <span class="badge bg-red-50 text-red-700">${esc(t.priority)}</span>
+                  </div>
+                `).join('') : '<p class="text-sm text-mocha">Semua tugas prioritas tinggi sudah selesai!</p>'}
+                ${unpaidTerms.slice(0, 2).map(u => `
+                  <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center justify-between gap-2">
+                    <div>
+                      <div class="text-sm font-medium text-amber-950">${esc(u.vendor)} — ${esc(u.label)}</div>
+                      <div class="text-xs text-amber-800">Jatuh tempo ${formatShortDate(u.dueDate)}</div>
+                    </div>
+                    <span class="text-xs font-bold text-amber-900">${rp(u.amount)}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="card-luxury p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-serif font-semibold text-lg">Agenda Terdekat</h3>
+                <button onclick="switchTab('calendar')" class="text-xs text-champagneDark hover:underline">Kalender</button>
+              </div>
+              <div class="space-y-2">
+                ${upcomingEvents.length ? upcomingEvents.map(ev => `
+                  <div class="p-3 rounded-xl bg-ivory border border-sand">
+                    <div class="text-xs font-semibold text-champagneDark">${formatShortDate(ev.date)} • ${esc(ev.time)}</div>
+                    <div class="text-sm font-medium text-espresso">${esc(ev.title)}</div>
+                    <div class="text-xs text-mocha">${esc(ev.location)}</div>
+                  </div>
+                `).join('') : '<p class="text-sm text-mocha">Belum ada agenda terjadwal.</p>'}
+              </div>
+            </div>
+
+            <div class="card-luxury p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-serif font-semibold text-lg">Log Aktivitas</h3>
+                <span class="text-xs text-mocha">${cloudConnected ? 'Cloud Live' : 'Lokal'}</span>
+              </div>
+              <div class="space-y-2">
+                ${logs.map(l => `
+                  <div class="p-2.5 rounded-xl bg-ivory border border-sand text-xs">
+                    <div class="font-semibold text-espresso">${esc(l.user)}</div>
+                    <div class="text-mocha">${esc(l.action)}</div>
+                    <div class="text-[10px] text-mocha/70 mt-0.5">${new Date(l.time).toLocaleString('id-ID')}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // ==================== 2. CHECKLIST ====================
+      function renderChecklist() {
+        const filtered = state.checklists.filter(c => {
+          const catOk = checklistFilterCat === 'Semua' || c.category === checklistFilterCat;
+          const stOk = checklistFilterStatus === 'Semua' || (checklistFilterStatus === 'Selesai' ? c.done : !c.done);
+          return catOk && stOk;
+        });
+
+        document.getElementById('tab-checklist').innerHTML = `
+          <div class="card-luxury p-5 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <select onchange="setChecklistFilter('cat', this.value)" class="input-lux w-auto">
+                <option value="Semua">Semua Kategori</option>
+                ${CHECKLIST_CATEGORIES.map(c => `<option value="${esc(c)}" ${checklistFilterCat === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+              </select>
+              <select onchange="setChecklistFilter('status', this.value)" class="input-lux w-auto">
+                <option value="Semua" ${checklistFilterStatus === 'Semua' ? 'selected' : ''}>Semua Status</option>
+                <option value="Belum" ${checklistFilterStatus === 'Belum' ? 'selected' : ''}>Belum Selesai</option>
+                <option value="Selesai" ${checklistFilterStatus === 'Selesai' ? 'selected' : ''}>Selesai</option>
+              </select>
+            </div>
+            <button onclick="openChecklistModal()" class="btn-gold text-sm">+ Tambah Tugas</button>
+          </div>
+
+          <div class="card-luxury divide-y divide-sand">
+            ${filtered.length ? filtered.map(c => `
+              <div class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-ivory/60">
+                <div class="flex items-start gap-3">
+                  <input type="checkbox" ${c.done ? 'checked' : ''} onchange="toggleChecklist('${c.id}')" class="mt-1 w-4 h-4 accent-[#C5A059] cursor-pointer" />
+                  <div>
+                    <div class="font-medium ${c.done ? 'line-through text-mocha/60' : 'text-espresso'}">${esc(c.title)}</div>
+                    <div class="text-xs text-mocha mt-0.5 flex flex-wrap gap-2">
+                      <span class="badge bg-beige text-espresso">${esc(c.category)}</span>
+                      <span>Tenggat: ${formatShortDate(c.dueDate)}</span>
+                      <span>PIC: ${esc(c.pic)}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 self-end sm:self-center">
+                  <span class="badge ${c.priority === 'Tinggi' ? 'bg-red-50 text-red-700' : c.priority === 'Sedang' ? 'bg-amber-50 text-amber-800' : 'bg-emerald-50 text-emerald-700'}">${esc(c.priority)}</span>
+                  <button onclick="openChecklistModal('${c.id}')" class="btn-outline text-xs px-2.5 py-1">Edit</button>
+                  <button onclick="deleteChecklist('${c.id}')" class="btn-outline text-xs px-2.5 py-1 text-red-600">Hapus</button>
+                </div>
+              </div>
+            `).join('') : '<div class="p-8 text-center text-sm text-mocha">Tidak ada tugas pada filter ini.</div>'}
+          </div>
+        `;
+      }
+
+      window.setChecklistFilter = function (type, val) {
+        if (type === 'cat') checklistFilterCat = val;
+        else checklistFilterStatus = val;
+        renderChecklist();
+      };
+      window.toggleChecklist = function (id) {
+        const item = state.checklists.find(c => c.id === id);
+        if (!item) return;
+        item.done = !item.done;
+        saveState(`${item.done ? 'Menyelesaikan' : 'Membuka kembali'} tugas: ${item.title}`);
+      };
+      window.deleteChecklist = function (id) {
+        const item = state.checklists.find(c => c.id === id);
+        state.checklists = state.checklists.filter(c => c.id !== id);
+        saveState(`Menghapus tugas: ${item ? item.title : id}`);
+      };
+      window.openChecklistModal = function (id) {
+        const item = id ? state.checklists.find(c => c.id === id) : null;
+        openModal(`
+          <h3 class="font-serif text-xl font-semibold mb-4">${item ? 'Edit Tugas' : 'Tambah Tugas Persiapan'}</h3>
+          <form onsubmit="submitChecklist(event, '${id || ''}')" class="space-y-3">
+            <div>
+              <label class="text-xs font-semibold text-mocha">Nama Tugas</label>
+              <input id="f-chk-title" required class="input-lux mt-1" value="${esc(item ? item.title : '')}" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Kategori</label>
+                <select id="f-chk-cat" class="input-lux mt-1">
+                  ${CHECKLIST_CATEGORIES.map(c => `<option value="${esc(c)}" ${item && item.category === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">Tenggat Waktu</label>
+                <input id="f-chk-due" type="date" required class="input-lux mt-1" value="${esc(item ? item.dueDate : state.event.weddingDate)}" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Prioritas</label>
+                <select id="f-chk-prio" class="input-lux mt-1">
+                  ${['Tinggi', 'Sedang', 'Rendah'].map(p => `<option ${item && item.priority === p ? 'selected' : ''}>${p}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">Penanggung Jawab (PIC)</label>
+                <select id="f-chk-pic" class="input-lux mt-1">
+                  ${['Fajar Sidiq', 'Selviana Nurhidayah', 'Bersama', 'Keluarga / WO'].map(p => `<option ${item && item.pic === p ? 'selected' : ''}>${p}</option>`).join('')}
+                </select>
+              </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-3">
+              <button type="button" onclick="closeModal()" class="btn-outline text-sm">Batal</button>
+              <button type="submit" class="btn-gold text-sm">Simpan</button>
+            </div>
+          </form>
+        `);
+      };
+      window.submitChecklist = function (e, id) {
+        e.preventDefault();
+        const payload = {
+          id: id || uid('chk'),
+          title: document.getElementById('f-chk-title').value.trim(),
+          category: document.getElementById('f-chk-cat').value,
+          dueDate: document.getElementById('f-chk-due').value,
+          priority: document.getElementById('f-chk-prio').value,
+          pic: document.getElementById('f-chk-pic').value,
+          done: false
+        };
+        if (id) {
+          const idx = state.checklists.findIndex(c => c.id === id);
+          if (idx >= 0) {
+            payload.done = state.checklists[idx].done;
+            state.checklists[idx] = payload;
+          }
+          saveState(`Memperbarui tugas: ${payload.title}`);
+        } else {
+          state.checklists.unshift(payload);
+          saveState(`Menambah tugas: ${payload.title}`);
+        }
+        closeModal();
+      };
+
+      // ==================== 3. BUDGET ====================
+      function renderBudget() {
+        const ceiling = Number(state.event.budgetCeiling || 0);
+        const totalEst = state.budgets.reduce((s, b) => s + Number(b.estimate || 0), 0);
+        const totalAct = state.budgets.reduce((s, b) => s + Number(b.actual || 0), 0);
+        const remaining = ceiling - totalAct;
+
+        document.getElementById('tab-budget').innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="card-luxury p-4">
+              <div class="text-xs text-mocha uppercase font-semibold">Plafon Anggaran</div>
+              <div class="text-xl font-bold mt-1">${rp(ceiling)}</div>
+              <button onclick="openEventSettingsModal()" class="text-xs text-champagneDark hover:underline mt-1">Ubah plafon</button>
+            </div>
+            <div class="card-luxury p-4">
+              <div class="text-xs text-mocha uppercase font-semibold">Total Estimasi</div>
+              <div class="text-xl font-bold mt-1">${rp(totalEst)}</div>
+            </div>
+            <div class="card-luxury p-4">
+              <div class="text-xs text-mocha uppercase font-semibold">Total Realisasi</div>
+              <div class="text-xl font-bold text-champagneDark mt-1">${rp(totalAct)}</div>
+            </div>
+            <div class="card-luxury p-4">
+              <div class="text-xs text-mocha uppercase font-semibold">Sisa Dana Plafon</div>
+              <div class="text-xl font-bold ${remaining < 0 ? 'text-red-600' : 'text-emerald-700'} mt-1">${rp(remaining)}</div>
+            </div>
+          </div>
+
+          <div class="card-luxury p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-serif text-lg font-semibold">Rincian Pos Anggaran</h3>
+              <button onclick="openBudgetModal()" class="btn-gold text-sm">+ Tambah Pos</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm text-left">
+                <thead class="bg-beige text-espresso text-xs uppercase">
+                  <tr>
+                    <th class="p-3 rounded-l-lg">Item</th>
+                    <th class="p-3">Kategori</th>
+                    <th class="p-3">Estimasi</th>
+                    <th class="p-3">Realisasi</th>
+                    <th class="p-3">Selisih / Status</th>
+                    <th class="p-3 rounded-r-lg text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-sand">
+                  ${state.budgets.map(b => {
+                    const diff = Number(b.estimate || 0) - Number(b.actual || 0);
+                    const over = Number(b.actual || 0) > Number(b.estimate || 0);
+                    return `
+                      <tr>
+                        <td class="p-3">
+                          <div class="font-medium">${esc(b.item)}</div>
+                          <div class="text-xs text-mocha">${esc(b.note || '')}</div>
+                        </td>
+                        <td class="p-3 text-xs">${esc(b.category)}</td>
+                        <td class="p-3">${rp(b.estimate)}</td>
+                        <td class="p-3 font-semibold">${rp(b.actual)}</td>
+                        <td class="p-3">
+                          <span class="badge ${over ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'}">
+                            ${over ? 'Over ' + rp(Math.abs(diff)) : 'Sisa ' + rp(diff)}
+                          </span>
+                        </td>
+                        <td class="p-3 text-right space-x-1 whitespace-nowrap">
+                          <button onclick="openBudgetModal('${b.id}')" class="btn-outline text-xs px-2.5 py-1">Edit</button>
+                          <button onclick="deleteBudget('${b.id}')" class="btn-outline text-xs px-2.5 py-1 text-red-600">Hapus</button>
+                        </td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      }
+
+      window.deleteBudget = function (id) {
+        const b = state.budgets.find(x => x.id === id);
+        state.budgets = state.budgets.filter(x => x.id !== id);
+        saveState(`Menghapus pos anggaran: ${b ? b.item : id}`);
+      };
+      window.openBudgetModal = function (id) {
+        const b = id ? state.budgets.find(x => x.id === id) : null;
+        openModal(`
+          <h3 class="font-serif text-xl font-semibold mb-4">${b ? 'Edit Pos Anggaran' : 'Tambah Pos Anggaran'}</h3>
+          <form onsubmit="submitBudget(event, '${id || ''}')" class="space-y-3">
+            <div>
+              <label class="text-xs font-semibold text-mocha">Nama Item</label>
+              <input id="f-bdg-item" required class="input-lux mt-1" value="${esc(b ? b.item : '')}" />
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Kategori</label>
+              <select id="f-bdg-cat" class="input-lux mt-1">
+                ${CHECKLIST_CATEGORIES.map(c => `<option ${b && b.category === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+              </select>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Estimasi (Rp)</label>
+                <input id="f-bdg-est" type="number" min="0" required class="input-lux mt-1" value="${b ? b.estimate : 0}" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">Realisasi Terbayar (Rp)</label>
+                <input id="f-bdg-act" type="number" min="0" required class="input-lux mt-1" value="${b ? b.actual : 0}" />
+              </div>
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Catatan</label>
+              <input id="f-bdg-note" class="input-lux mt-1" value="${esc(b ? b.note : '')}" />
+            </div>
+            <div class="flex justify-end gap-2 pt-3">
+              <button type="button" onclick="closeModal()" class="btn-outline text-sm">Batal</button>
+              <button type="submit" class="btn-gold text-sm">Simpan</button>
+            </div>
+          </form>
+        `);
+      };
+      window.submitBudget = function (e, id) {
+        e.preventDefault();
+        const payload = {
+          id: id || uid('bdg'),
+          item: document.getElementById('f-bdg-item').value.trim(),
+          category: document.getElementById('f-bdg-cat').value,
+          estimate: Number(document.getElementById('f-bdg-est').value || 0),
+          actual: Number(document.getElementById('f-bdg-act').value || 0),
+          note: document.getElementById('f-bdg-note').value.trim()
+        };
+        if (id) {
+          const idx = state.budgets.findIndex(x => x.id === id);
+          if (idx >= 0) state.budgets[idx] = payload;
+          saveState(`Memperbarui anggaran: ${payload.item}`);
+        } else {
+          state.budgets.unshift(payload);
+          saveState(`Menambah anggaran: ${payload.item}`);
+        }
+        closeModal();
+      };
+
+      // ==================== 4. GUESTS & RSVP ====================
+      function renderGuests() {
+        const filtered = state.guests.filter(g => {
+          const q = guestSearch.toLowerCase();
+          const mQ = !q || (g.name || '').toLowerCase().includes(q) || (g.wish || '').toLowerCase().includes(q);
+          const mR = guestFilterRel === 'Semua' || g.relation === guestFilterRel;
+          const mS = guestFilterRsvp === 'Semua' || g.rsvp === guestFilterRsvp;
+          return mQ && mR && mS;
+        });
+
+        const totalPaxHadir = state.guests.filter(g => g.rsvp === 'Hadir').reduce((s, g) => s + Number(g.pax || 1), 0);
+        const totalPaxPending = state.guests.filter(g => g.rsvp === 'Belum Konfirmasi').reduce((s, g) => s + Number(g.pax || 1), 0);
+
+        document.getElementById('tab-guests').innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="card-luxury p-4">
+              <div class="text-xs text-mocha uppercase font-semibold">Total Undangan</div>
+              <div class="text-2xl font-bold mt-1">${state.guests.length} Nama</div>
+            </div>
+            <div class="card-luxury p-4">
+              <div class="text-xs text-mocha uppercase font-semibold">Estimasi Hadir</div>
+              <div class="text-2xl font-bold text-emerald-700 mt-1">${totalPaxHadir} Pax</div>
+            </div>
+            <div class="card-luxury p-4">
+              <div class="text-xs text-mocha uppercase font-semibold">Belum Konfirmasi</div>
+              <div class="text-2xl font-bold text-amber-700 mt-1">${totalPaxPending} Pax</div>
+            </div>
+          </div>
+
+          <div class="card-luxury p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div class="flex flex-wrap items-center gap-2 flex-1">
+                <input id="guest-search-box" type="search" value="${esc(guestSearch)}" oninput="setGuestFilter('q', this.value)" placeholder="Cari nama tamu..." class="input-lux max-w-xs" />
+                <select onchange="setGuestFilter('rel', this.value)" class="input-lux w-auto">
+                  <option value="Semua">Semua Relasi</option>
+                  ${GUEST_RELATIONS.map(r => `<option ${guestFilterRel === r ? 'selected' : ''}>${esc(r)}</option>`).join('')}
+                </select>
+                <select onchange="setGuestFilter('rsvp', this.value)" class="input-lux w-auto">
+                  <option value="Semua">Semua Status</option>
+                  ${['Hadir', 'Belum Konfirmasi', 'Tidak Hadir'].map(s => `<option ${guestFilterRsvp === s ? 'selected' : ''}>${s}</option>`).join('')}
+                </select>
+              </div>
+              <button onclick="openGuestModal()" class="btn-gold text-sm">+ Tambah Tamu</button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm text-left">
+                <thead class="bg-beige text-xs uppercase">
+                  <tr>
+                    <th class="p-3 rounded-l-lg">Nama &amp; Ucapan</th>
+                    <th class="p-3">Relasi</th>
+                    <th class="p-3">Pax</th>
+                    <th class="p-3">Status RSVP</th>
+                    <th class="p-3 rounded-r-lg text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-sand">
+                  ${filtered.length ? filtered.map(g => `
+                    <tr>
+                      <td class="p-3">
+                        <div class="font-medium">${esc(g.name)}</div>
+                        ${g.wish ? `<div class="text-xs italic text-mocha mt-0.5">"${esc(g.wish)}"</div>` : ''}
+                      </td>
+                      <td class="p-3 text-xs">${esc(g.relation)}</td>
+                      <td class="p-3 font-medium">${Number(g.pax || 1)}</td>
+                      <td class="p-3">
+                        <select onchange="quickChangeRsvp('${g.id}', this.value)" class="input-lux py-1 px-2 text-xs w-auto">
+                          ${['Hadir', 'Belum Konfirmasi', 'Tidak Hadir'].map(st => `<option ${g.rsvp === st ? 'selected' : ''}>${st}</option>`).join('')}
+                        </select>
+                      </td>
+                      <td class="p-3 text-right space-x-1 whitespace-nowrap">
+                        <button onclick="copyPersonalInviteLink('${esc(g.name)}')" class="btn-outline text-xs px-2.5 py-1">Salin Link</button>
+                        <button onclick="openGuestModal('${g.id}')" class="btn-outline text-xs px-2.5 py-1">Edit</button>
+                        <button onclick="deleteGuest('${g.id}')" class="btn-outline text-xs px-2.5 py-1 text-red-600">Hapus</button>
+                      </td>
+                    </tr>
+                  `).join('') : '<tr><td colspan="5" class="p-6 text-center text-mocha">Data tamu tidak ditemukan.</td></tr>'}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+        if (document.activeElement && document.activeElement.id === 'guest-search-box') {
+          const box = document.getElementById('guest-search-box');
+          box.focus();
+          box.setSelectionRange(box.value.length, box.value.length);
+        }
+      }
+
+      window.setGuestFilter = function (type, val) {
+        if (type === 'q') guestSearch = val;
+        else if (type === 'rel') guestFilterRel = val;
+        else guestFilterRsvp = val;
+        renderGuests();
+      };
+      window.quickChangeRsvp = function (id, val) {
+        const g = state.guests.find(x => x.id === id);
+        if (!g) return;
+        g.rsvp = val;
+        saveState(`Mengubah RSVP ${g.name} menjadi ${val}`);
+      };
+      window.copyPersonalInviteLink = function (name) {
+        const url = new URL(window.location.href);
+        url.search = '';
+        url.searchParams.set('undangan', '1');
+        url.searchParams.set('tamu', name);
+        copyText(url.toString(), `Link undangan untuk ${name} disalin!`);
+      };
+      window.deleteGuest = function (id) {
+        const g = state.guests.find(x => x.id === id);
+        state.guests = state.guests.filter(x => x.id !== id);
+        saveState(`Menghapus tamu: ${g ? g.name : id}`);
+      };
+      window.openGuestModal = function (id) {
+        const g = id ? state.guests.find(x => x.id === id) : null;
+        openModal(`
+          <h3 class="font-serif text-xl font-semibold mb-4">${g ? 'Edit Data Tamu' : 'Tambah Tamu Undangan'}</h3>
+          <form onsubmit="submitGuest(event, '${id || ''}')" class="space-y-3">
+            <div>
+              <label class="text-xs font-semibold text-mocha">Nama Tamu / Instansi</label>
+              <input id="f-gst-name" required class="input-lux mt-1" value="${esc(g ? g.name : '')}" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Relasi</label>
+                <select id="f-gst-rel" class="input-lux mt-1">
+                  ${GUEST_RELATIONS.map(r => `<option ${g && g.relation === r ? 'selected' : ''}>${esc(r)}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">Jumlah Pax</label>
+                <input id="f-gst-pax" type="number" min="1" required class="input-lux mt-1" value="${g ? g.pax : 2}" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Status RSVP</label>
+                <select id="f-gst-rsvp" class="input-lux mt-1">
+                  ${['Hadir', 'Belum Konfirmasi', 'Tidak Hadir'].map(s => `<option ${g && g.rsvp === s ? 'selected' : ''}>${s}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">No. WhatsApp</label>
+                <input id="f-gst-phone" class="input-lux mt-1" value="${esc(g ? g.phone : '')}" />
+              </div>
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Ucapan / Catatan</label>
+              <textarea id="f-gst-wish" rows="2" class="input-lux mt-1">${esc(g ? g.wish : '')}</textarea>
+            </div>
+            <div class="flex justify-end gap-2 pt-3">
+              <button type="button" onclick="closeModal()" class="btn-outline text-sm">Batal</button>
+              <button type="submit" class="btn-gold text-sm">Simpan</button>
+            </div>
+          </form>
+        `);
+      };
+      window.submitGuest = function (e, id) {
+        e.preventDefault();
+        const payload = {
+          id: id || uid('gst'),
+          name: document.getElementById('f-gst-name').value.trim(),
+          relation: document.getElementById('f-gst-rel').value,
+          pax: Number(document.getElementById('f-gst-pax').value || 1),
+          rsvp: document.getElementById('f-gst-rsvp').value,
+          phone: document.getElementById('f-gst-phone').value.trim(),
+          wish: document.getElementById('f-gst-wish').value.trim()
+        };
+        if (id) {
+          const idx = state.guests.findIndex(x => x.id === id);
+          if (idx >= 0) state.guests[idx] = payload;
+          saveState(`Memperbarui tamu: ${payload.name}`);
+        } else {
+          state.guests.unshift(payload);
+          saveState(`Menambah tamu: ${payload.name}`);
+        }
+        closeModal();
+      };
+
+      // ==================== 5. VENDORS & TERMIN ====================
+      function renderVendors() {
+        document.getElementById('tab-vendors').innerHTML = `
+          <div class="card-luxury p-5 flex items-center justify-between gap-3">
+            <div>
+              <h3 class="font-serif text-lg font-semibold">Daftar Vendor &amp; Pembayaran Termin</h3>
+              <p class="text-xs text-mocha">Kelola kontrak vendor dan status pelunasan per tahap.</p>
+            </div>
+            <button onclick="openVendorModal()" class="btn-gold text-sm">+ Tambah Vendor</button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            ${state.vendors.map(v => {
+              const paid = (v.payments || []).filter(p => p.paid).reduce((s, p) => s + Number(p.amount || 0), 0);
+              const pct = v.contractTotal ? Math.min(100, Math.round((paid / v.contractTotal) * 100)) : 0;
+              return `
+                <div class="card-luxury p-5 space-y-4">
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <span class="badge bg-beige text-champagneDark">${esc(v.category)}</span>
+                      <h4 class="font-serif text-lg font-semibold mt-1">${esc(v.name)}</h4>
+                      <div class="text-xs text-mocha">Kontak: ${esc(v.contact || '-')}</div>
+                    </div>
+                    <div class="flex gap-1.5">
+                      <button onclick="openVendorModal('${v.id}')" class="btn-outline text-xs px-2.5 py-1">Edit</button>
+                      <button onclick="deleteVendor('${v.id}')" class="btn-outline text-xs px-2.5 py-1 text-red-600">Hapus</button>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1">
+                      <span>Terbayar: <strong>${rp(paid)}</strong></span>
+                      <span>Kontrak: <strong>${rp(v.contractTotal)}</strong> (${pct}%)</span>
+                    </div>
+                    <div class="w-full h-2 bg-beige rounded-full overflow-hidden">
+                      <div class="h-full bg-champagne" style="width:${pct}%"></div>
+                    </div>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-semibold uppercase text-mocha">Jadwal Termin</span>
+                      <button onclick="openTerminModal('${v.id}')" class="text-xs text-champagneDark font-semibold hover:underline">+ Tambah Termin</button>
+                    </div>
+                    ${(v.payments || []).map(p => `
+                      <div class="p-2.5 rounded-xl bg-ivory border border-sand flex items-center justify-between gap-2 text-xs">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                          <input type="checkbox" ${p.paid ? 'checked' : ''} onchange="toggleTerminPaid('${v.id}','${p.id}')" class="accent-[#C5A059]" />
+                          <div>
+                            <div class="font-medium ${p.paid ? 'line-through text-mocha' : 'text-espresso'}">${esc(p.label)}</div>
+                            <div class="text-[11px] text-mocha">Jatuh tempo: ${formatShortDate(p.dueDate)}</div>
+                          </div>
+                        </label>
+                        <div class="flex items-center gap-2">
+                          <span class="font-semibold">${rp(p.amount)}</span>
+                          <button onclick="deleteTermin('${v.id}','${p.id}')" class="text-red-500 hover:underline">✕</button>
+                        </div>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      window.toggleTerminPaid = function (vid, pid) {
+        const v = state.vendors.find(x => x.id === vid);
+        if (!v) return;
+        const p = (v.payments || []).find(x => x.id === pid);
+        if (!p) return;
+        p.paid = !p.paid;
+        saveState(`Mengubah status ${p.label} (${v.name}) menjadi ${p.paid ? 'Lunas' : 'Belum Lunas'}`);
+      };
+      window.deleteTermin = function (vid, pid) {
+        const v = state.vendors.find(x => x.id === vid);
+        if (!v) return;
+        v.payments = (v.payments || []).filter(x => x.id !== pid);
+        saveState(`Menghapus termin pembayaran pada ${v.name}`);
+      };
+      window.deleteVendor = function (vid) {
+        const v = state.vendors.find(x => x.id === vid);
+        state.vendors = state.vendors.filter(x => x.id !== vid);
+        saveState(`Menghapus vendor: ${v ? v.name : vid}`);
+      };
+      window.openVendorModal = function (id) {
+        const v = id ? state.vendors.find(x => x.id === id) : null;
+        openModal(`
+          <h3 class="font-serif text-xl font-semibold mb-4">${v ? 'Edit Vendor' : 'Tambah Vendor Baru'}</h3>
+          <form onsubmit="submitVendor(event, '${id || ''}')" class="space-y-3">
+            <div>
+              <label class="text-xs font-semibold text-mocha">Nama Vendor</label>
+              <input id="f-vnd-name" required class="input-lux mt-1" value="${esc(v ? v.name : '')}" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Kategori</label>
+                <select id="f-vnd-cat" class="input-lux mt-1">
+                  ${CHECKLIST_CATEGORIES.map(c => `<option ${v && v.category === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">No. Kontak / WA</label>
+                <input id="f-vnd-contact" class="input-lux mt-1" value="${esc(v ? v.contact : '')}" />
+              </div>
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Total Nilai Kontrak (Rp)</label>
+              <input id="f-vnd-total" type="number" min="0" required class="input-lux mt-1" value="${v ? v.contractTotal : 0}" />
+            </div>
+            <div class="flex justify-end gap-2 pt-3">
+              <button type="button" onclick="closeModal()" class="btn-outline text-sm">Batal</button>
+              <button type="submit" class="btn-gold text-sm">Simpan</button>
+            </div>
+          </form>
+        `);
+      };
+      window.submitVendor = function (e, id) {
+        e.preventDefault();
+        const name = document.getElementById('f-vnd-name').value.trim();
+        const category = document.getElementById('f-vnd-cat').value;
+        const contact = document.getElementById('f-vnd-contact').value.trim();
+        const contractTotal = Number(document.getElementById('f-vnd-total').value || 0);
+        if (id) {
+          const v = state.vendors.find(x => x.id === id);
+          if (v) Object.assign(v, { name, category, contact, contractTotal });
+          saveState(`Memperbarui vendor: ${name}`);
+        } else {
+          state.vendors.unshift({ id: uid('vnd'), name, category, contact, contractTotal, payments: [] });
+          saveState(`Menambah vendor: ${name}`);
+        }
+        closeModal();
+      };
+      window.openTerminModal = function (vid) {
+        openModal(`
+          <h3 class="font-serif text-xl font-semibold mb-4">Tambah Termin Pembayaran</h3>
+          <form onsubmit="submitTermin(event, '${vid}')" class="space-y-3">
+            <div>
+              <label class="text-xs font-semibold text-mocha">Nama Termin (misal: DP / Pelunasan)</label>
+              <input id="f-trm-label" required class="input-lux mt-1" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Nominal (Rp)</label>
+                <input id="f-trm-amount" type="number" min="0" required class="input-lux mt-1" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">Jatuh Tempo</label>
+                <input id="f-trm-due" type="date" required class="input-lux mt-1" value="${state.event.weddingDate}" />
+              </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-3">
+              <button type="button" onclick="closeModal()" class="btn-outline text-sm">Batal</button>
+              <button type="submit" class="btn-gold text-sm">Simpan</button>
+            </div>
+          </form>
+        `);
+      };
+      window.submitTermin = function (e, vid) {
+        e.preventDefault();
+        const v = state.vendors.find(x => x.id === vid);
+        if (!v) return;
+        v.payments = v.payments || [];
+        v.payments.push({
+          id: uid('pay'),
+          label: document.getElementById('f-trm-label').value.trim(),
+          amount: Number(document.getElementById('f-trm-amount').value || 0),
+          dueDate: document.getElementById('f-trm-due').value,
+          paid: false
+        });
+        saveState(`Menambah termin pada vendor ${v.name}`);
+        closeModal();
+      };
+
+      // ==================== 6. CALENDAR ====================
+      function renderCalendar() {
+        const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        const firstDay = new Date(calYear, calMonth, 1).getDay();
+        const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+        const cells = [];
+        for (let i = 0; i < firstDay; i++) cells.push('');
+        for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+
+        const sortedEvents = [...state.eventsCalendar].sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+
+        document.getElementById('tab-calendar').innerHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div class="card-luxury p-5 lg:col-span-2">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-serif text-lg font-semibold">${monthNames[calMonth]} ${calYear}</h3>
+                <div class="flex gap-2">
+                  <button onclick="shiftCalMonth(-1)" class="btn-outline px-3 py-1 text-xs">◀</button>
+                  <button onclick="shiftCalMonth(1)" class="btn-outline px-3 py-1 text-xs">▶</button>
+                  <button onclick="openCalendarModal()" class="btn-gold text-xs">+ Agenda</button>
+                </div>
+              </div>
+              <div class="grid grid-cols-7 gap-1.5 text-center text-xs font-semibold text-mocha mb-2">
+                <div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div>
+              </div>
+              <div class="grid grid-cols-7 gap-1.5">
+                ${cells.map(d => {
+                  if (!d) return '<div class="h-14"></div>';
+                  const iso = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                  const hasEv = state.eventsCalendar.some(ev => ev.date === iso);
+                  const isSel = selectedCalDate === iso;
+                  const isWed = state.event.weddingDate === iso;
+                  return `
+                    <button onclick="selectCalDay('${iso}')" class="h-14 rounded-xl border text-xs flex flex-col items-center justify-center relative ${isSel ? 'border-champagne bg-beige font-bold' : 'border-sand bg-white hover:bg-ivory'}">
+                      <span>${d}</span>
+                      ${isWed ? '<span class="text-[10px] text-champagneDark font-bold">♥ H</span>' : hasEv ? '<span class="w-1.5 h-1.5 rounded-full bg-champagne mt-1"></span>' : ''}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <div class="card-luxury p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-serif text-lg font-semibold">Timeline Agenda</h3>
+                <button onclick="openCalendarModal('${selectedCalDate}')" class="text-xs text-champagneDark font-semibold hover:underline">+ Di tanggal dipilih</button>
+              </div>
+              <div class="space-y-2 max-h-[420px] overflow-y-auto">
+                ${sortedEvents.map(ev => `
+                  <div class="p-3 rounded-xl border ${ev.date === selectedCalDate ? 'border-champagne bg-beige/60' : 'border-sand bg-ivory'}">
+                    <div class="flex items-start justify-between gap-2">
+                      <div class="text-xs font-semibold text-champagneDark">${formatShortDate(ev.date)} • ${esc(ev.time)}</div>
+                      <button onclick="deleteCalEvent('${ev.id}')" class="text-xs text-red-500 hover:underline">Hapus</button>
+                    </div>
+                    <div class="font-medium text-sm text-espresso mt-0.5">${esc(ev.title)}</div>
+                    <div class="text-xs text-mocha">${esc(ev.location)}</div>
+                    ${ev.note ? `<div class="text-[11px] text-mocha/80 mt-1">${esc(ev.note)}</div>` : ''}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      window.shiftCalMonth = function (delta) {
+        calMonth += delta;
+        if (calMonth < 0) { calMonth = 11; calYear--; }
+        else if (calMonth > 11) { calMonth = 0; calYear++; }
+        renderCalendar();
+      };
+      window.selectCalDay = function (iso) {
+        selectedCalDate = iso;
+        renderCalendar();
+      };
+      window.deleteCalEvent = function (id) {
+        state.eventsCalendar = state.eventsCalendar.filter(e => e.id !== id);
+        saveState('Menghapus agenda kalender');
+      };
+      window.openCalendarModal = function (prefillDate) {
+        openModal(`
+          <h3 class="font-serif text-xl font-semibold mb-4">Tambah Agenda Acara</h3>
+          <form onsubmit="submitCalendar(event)" class="space-y-3">
+            <div>
+              <label class="text-xs font-semibold text-mocha">Judul Agenda</label>
+              <input id="f-cal-title" required class="input-lux mt-1" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Tanggal</label>
+                <input id="f-cal-date" type="date" required class="input-lux mt-1" value="${esc(prefillDate || selectedCalDate)}" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">Jam</label>
+                <input id="f-cal-time" type="time" required class="input-lux mt-1" value="10:00" />
+              </div>
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Lokasi</label>
+              <input id="f-cal-loc" class="input-lux mt-1" />
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Catatan</label>
+              <input id="f-cal-note" class="input-lux mt-1" />
+            </div>
+            <div class="flex justify-end gap-2 pt-3">
+              <button type="button" onclick="closeModal()" class="btn-outline text-sm">Batal</button>
+              <button type="submit" class="btn-gold text-sm">Simpan</button>
+            </div>
+          </form>
+        `);
+      };
+      window.submitCalendar = function (e) {
+        e.preventDefault();
+        const title = document.getElementById('f-cal-title').value.trim();
+        state.eventsCalendar.push({
+          id: uid('cal'),
+          title,
+          date: document.getElementById('f-cal-date').value,
+          time: document.getElementById('f-cal-time').value,
+          location: document.getElementById('f-cal-loc').value.trim(),
+          note: document.getElementById('f-cal-note').value.trim()
+        });
+        saveState(`Menambah agenda: ${title}`);
+        closeModal();
+      };
+
+      // ==================== 7. MOODBOARD ====================
+      function renderMoodboard() {
+        const swatches = [
+          { name: 'Champagne Gold', hex: '#C5A059' },
+          { name: 'Warm Ivory', hex: '#FAF8F5' },
+          { name: 'Soft Beige', hex: '#F3EDE2' },
+          { name: 'Sand Border', hex: '#E6DEC8' },
+          { name: 'Deep Espresso', hex: '#2C221E' }
+        ];
+
+        document.getElementById('tab-moodboard').innerHTML = `
+          <div class="card-luxury p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-serif text-lg font-semibold">Palet Warna Pernikahan</h3>
+                <p class="text-xs text-mocha">Klik warna untuk menyalin kode hex.</p>
+              </div>
+              <button onclick="openMoodboardModal()" class="btn-gold text-sm">+ Tambah Referensi</button>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+              ${swatches.map(s => `
+                <button onclick="copyText('${s.hex}', 'Kode warna ${s.hex} disalin!')" class="p-3 rounded-xl border border-sand bg-white text-left hover:shadow">
+                  <div class="h-12 rounded-lg border border-sand mb-2" style="background:${s.hex}"></div>
+                  <div class="text-xs font-semibold">${s.name}</div>
+                  <div class="text-[11px] text-mocha">${s.hex}</div>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            ${state.moodboard.map(m => `
+              <div class="card-luxury overflow-hidden flex flex-col">
+                ${m.imageUrl ? `<img src="${esc(m.imageUrl)}" alt="${esc(m.title)}" class="w-full h-44 object-cover" onerror="this.style.display='none'" />` : `<div class="h-24 bg-gradient-to-br from-beige to-sand flex items-center justify-center font-serif italic text-mocha">${esc(m.category)}</div>`}
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                  <div>
+                    <span class="badge bg-beige text-champagneDark mb-1">${esc(m.category)}</span>
+                    <h4 class="font-serif font-semibold text-base">${esc(m.title)}</h4>
+                    <p class="text-xs text-mocha mt-1">${esc(m.note)}</p>
+                  </div>
+                  <div class="pt-3 text-right">
+                    <button onclick="deleteMoodboard('${m.id}')" class="text-xs text-red-600 hover:underline">Hapus</button>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      window.deleteMoodboard = function (id) {
+        state.moodboard = state.moodboard.filter(m => m.id !== id);
+        saveState('Menghapus referensi moodboard');
+      };
+      window.openMoodboardModal = function () {
+        openModal(`
+          <h3 class="font-serif text-xl font-semibold mb-4">Tambah Referensi Inspirasi</h3>
+          <form onsubmit="submitMoodboard(event)" class="space-y-3">
+            <div>
+              <label class="text-xs font-semibold text-mocha">Judul Referensi</label>
+              <input id="f-mb-title" required class="input-lux mt-1" />
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Kategori</label>
+              <select id="f-mb-cat" class="input-lux mt-1">
+                <option>Dekorasi</option><option>Busana</option><option>Makeup</option><option>Undangan</option><option>Lainnya</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">URL Gambar (Opsional)</label>
+              <input id="f-mb-img" type="url" placeholder="https://..." class="input-lux mt-1" />
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Catatan Konsep</label>
+              <textarea id="f-mb-note" rows="3" required class="input-lux mt-1"></textarea>
+            </div>
+            <div class="flex justify-end gap-2 pt-3">
+              <button type="button" onclick="closeModal()" class="btn-outline text-sm">Batal</button>
+              <button type="submit" class="btn-gold text-sm">Simpan</button>
+            </div>
+          </form>
+        `);
+      };
+      window.submitMoodboard = function (e) {
+        e.preventDefault();
+        const title = document.getElementById('f-mb-title').value.trim();
+        state.moodboard.unshift({
+          id: uid('mb'),
+          title,
+          category: document.getElementById('f-mb-cat').value,
+          imageUrl: document.getElementById('f-mb-img').value.trim(),
+          note: document.getElementById('f-mb-note').value.trim()
+        });
+        saveState(`Menambah moodboard: ${title}`);
+        closeModal();
+      };
+
+      // ==================== 8. DIGITAL INVITATION ====================
+      function getInviteHtml(guestNameParam) {
+        const theme = state.event.inviteTheme || 'champagne';
+        const cd = getCountdownParts();
+        const themes = {
+          champagne: 'bg-gradient-to-b from-[#FAF8F5] to-[#F3EDE2] text-[#2C221E] border-[#C5A059]',
+          espresso: 'bg-gradient-to-b from-[#2C221E] to-[#1E1714] text-[#FAF8F5] border-[#C5A059]',
+          floral: 'bg-gradient-to-b from-[#FFFDF9] to-[#F7EFE5] text-[#3D2E27] border-[#D4B483]'
+        };
+        const cls = themes[theme] || themes.champagne;
+        const wishes = state.guests.filter(g => g.wish).slice(0, 6);
+
+        return `
+          <div class="rounded-2xl border-2 p-6 md:p-10 text-center space-y-6 ${cls}">
+            <div class="text-xs uppercase tracking-[0.25em] text-[#C5A059] font-semibold">The Wedding Of</div>
+            ${guestNameParam ? `<div class="inline-block px-4 py-1.5 rounded-full border border-[#C5A059]/50 text-xs">Kepada Yth: <strong>${esc(guestNameParam)}</strong></div>` : ''}
+            <div>
+              <h2 class="text-3xl md:text-5xl font-serif font-bold">${esc(state.event.groomName)}</h2>
+              <div class="text-2xl font-serif italic text-[#C5A059] my-1">&amp;</div>
+              <h2 class="text-3xl md:text-5xl font-serif font-bold">${esc(state.event.brideName)}</h2>
+            </div>
+            <p class="max-w-lg mx-auto text-xs md:text-sm opacity-80 italic">"${esc(state.event.quote)}"</p>
+
+            <div class="grid grid-cols-4 gap-2 max-w-sm mx-auto">
+              <div class="p-2.5 rounded-xl border border-[#C5A059]/40"><div data-cd-days class="text-xl font-bold text-[#C5A059]">${String(cd.days).padStart(2,'0')}</div><div class="text-[10px] uppercase">Hari</div></div>
+              <div class="p-2.5 rounded-xl border border-[#C5A059]/40"><div data-cd-hours class="text-xl font-bold text-[#C5A059]">${String(cd.hours).padStart(2,'0')}</div><div class="text-[10px] uppercase">Jam</div></div>
+              <div class="p-2.5 rounded-xl border border-[#C5A059]/40"><div data-cd-mins class="text-xl font-bold text-[#C5A059]">${String(cd.mins).padStart(2,'0')}</div><div class="text-[10px] uppercase">Menit</div></div>
+              <div class="p-2.5 rounded-xl border border-[#C5A059]/40"><div data-cd-secs class="text-xl font-bold text-[#C5A059]">${String(cd.secs).padStart(2,'0')}</div><div class="text-[10px] uppercase">Detik</div></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto text-left">
+              <div class="p-4 rounded-xl border border-[#C5A059]/40">
+                <div class="text-xs uppercase font-bold text-[#C5A059]">Akad Nikah</div>
+                <div class="font-semibold text-sm mt-1">${formatDateID(state.event.weddingDate)}</div>
+                <div class="text-xs opacity-80">${esc(state.event.akadTime)}</div>
+              </div>
+              <div class="p-4 rounded-xl border border-[#C5A059]/40">
+                <div class="text-xs uppercase font-bold text-[#C5A059]">Resepsi</div>
+                <div class="font-semibold text-sm mt-1">${formatDateID(state.event.weddingDate)}</div>
+                <div class="text-xs opacity-80">${esc(state.event.resepsiTime)}</div>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <div class="font-serif font-semibold text-lg">${esc(state.event.venueName)}</div>
+              <div class="text-xs opacity-80">${esc(state.event.venueAddress)}</div>
+              <button type="button" onclick="copyText('${esc(state.event.venueAddress)}', 'Alamat acara disalin!')" class="btn-gold text-xs px-4 py-2">Salin Alamat Lokasi</button>
+            </div>
+
+            <!-- Form RSVP & Ucapan -->
+            <form onsubmit="submitPublicRsvp(event)" class="max-w-md mx-auto text-left p-5 rounded-xl border border-[#C5A059]/40 bg-white/90 text-[#2C221E] space-y-3">
+              <div class="font-serif font-semibold text-center text-base">Konfirmasi Kehadiran &amp; Ucapan</div>
+              <input id="pub-rsvp-name" required placeholder="Nama Lengkap" class="input-lux" value="${esc(guestNameParam || '')}" />
+              <div class="grid grid-cols-2 gap-2">
+                <select id="pub-rsvp-status" class="input-lux">
+                  <option value="Hadir">InsyaAllah Hadir</option>
+                  <option value="Tidak Hadir">Berhalangan Hadir</option>
+                </select>
+                <input id="pub-rsvp-pax" type="number" min="1" max="10" value="2" class="input-lux" placeholder="Jumlah Tamu" />
+              </div>
+              <textarea id="pub-rsvp-wish" rows="2" placeholder="Tuliskan doa terbaik untuk Fajar & Selviana..." class="input-lux"></textarea>
+              <button type="submit" class="btn-gold w-full text-sm">Kirim RSVP &amp; Ucapan</button>
+            </form>
+
+            ${wishes.length ? `
+              <div class="max-w-lg mx-auto text-left space-y-2 pt-2">
+                <div class="text-xs uppercase font-bold text-[#C5A059] text-center">Ucapan &amp; Doa Tamu</div>
+                ${wishes.map(w => `
+                  <div class="p-3 rounded-xl border border-[#C5A059]/30 text-xs">
+                    <div class="font-semibold">${esc(w.name)} <span class="opacity-70">(${esc(w.rsvp)})</span></div>
+                    <div class="italic mt-0.5">"${esc(w.wish)}"</div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      function renderInvitationTab() {
+        const pubUrl = new URL(window.location.href);
+        pubUrl.search = '?undangan=1';
+        document.getElementById('tab-invitation').innerHTML = `
+          <div class="card-luxury p-5 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-xs font-semibold text-mocha">Tema Undangan:</span>
+              <button onclick="setInviteTheme('champagne')" class="btn-outline text-xs ${state.event.inviteTheme === 'champagne' ? 'border-champagne bg-beige' : ''}">Champagne Ivory</button>
+              <button onclick="setInviteTheme('espresso')" class="btn-outline text-xs ${state.event.inviteTheme === 'espresso' ? 'border-champagne bg-beige' : ''}">Royal Espresso Gold</button>
+              <button onclick="setInviteTheme('floral')" class="btn-outline text-xs ${state.event.inviteTheme === 'floral' ? 'border-champagne bg-beige' : ''}">Soft Floral Beige</button>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="copyText('${esc(pubUrl.toString())}', 'Link undangan publik disalin!')" class="btn-gold text-xs">Salin Link Undangan Publik</button>
+              <button onclick="enterPublicInviteMode()" class="btn-outline text-xs">Buka Mode Tamu</button>
+            </div>
+          </div>
+          ${getInviteHtml('')}
+        `;
+      }
+
+      function renderPublicInvitation() {
+        const params = new URLSearchParams(window.location.search);
+        const guestParam = params.get('tamu') || '';
+        document.getElementById('public-invite-card').innerHTML = getInviteHtml(guestParam);
+      }
+
+      window.setInviteTheme = function (theme) {
+        state.event.inviteTheme = theme;
+        saveState(`Mengubah tema undangan menjadi ${theme}`);
+      };
+
+      window.submitPublicRsvp = function (e) {
+        e.preventDefault();
+        const name = document.getElementById('pub-rsvp-name').value.trim();
+        const rsvp = document.getElementById('pub-rsvp-status').value;
+        const pax = Number(document.getElementById('pub-rsvp-pax').value || 1);
+        const wish = document.getElementById('pub-rsvp-wish').value.trim();
+        const existing = state.guests.find(g => g.name.toLowerCase() === name.toLowerCase());
+        if (existing) {
+          existing.rsvp = rsvp;
+          existing.pax = pax;
+          if (wish) existing.wish = wish;
+        } else {
+          state.guests.unshift({
+            id: uid('gst'),
+            name,
+            relation: 'Sahabat / Umum',
+            pax,
+            rsvp,
+            phone: '',
+            wish
+          });
+        }
+        saveState(`RSVP masuk dari undangan: ${name} (${rsvp})`);
+        showToast('Terima kasih! Konfirmasi & ucapan Anda telah tersimpan.');
+        if (!document.getElementById('public-invitation-view').classList.contains('hidden')) {
+          renderPublicInvitation();
+        }
+      };
+
+      // ==================== SETTINGS, CLOUD SETUP, EXPORT/IMPORT ====================
+      window.openEventSettingsModal = function () {
+        const ev = state.event;
+        openModal(`
+          <h3 class="font-serif text-xl font-semibold mb-4">Pengaturan Acara &amp; PIN</h3>
+          <form onsubmit="submitEventSettings(event)" class="space-y-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Pengantin Pria</label>
+                <input id="s-groom" required class="input-lux mt-1" value="${esc(ev.groomName)}" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">Pengantin Wanita</label>
+                <input id="s-bride" required class="input-lux mt-1" value="${esc(ev.brideName)}" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Tanggal Acara</label>
+                <input id="s-date" type="date" required class="input-lux mt-1" value="${esc(ev.weddingDate)}" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">Jam Akad</label>
+                <input id="s-akad" required class="input-lux mt-1" value="${esc(ev.akadTime)}" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">Jam Resepsi</label>
+                <input id="s-resepsi" required class="input-lux mt-1" value="${esc(ev.resepsiTime)}" />
+              </div>
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Nama Gedung / Venue</label>
+              <input id="s-venue" required class="input-lux mt-1" value="${esc(ev.venueName)}" />
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Alamat Lengkap Venue</label>
+              <input id="s-addr" required class="input-lux mt-1" value="${esc(ev.venueAddress)}" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-mocha">Plafon Anggaran (Rp)</label>
+                <input id="s-ceiling" type="number" min="0" required class="input-lux mt-1" value="${Number(ev.budgetCeiling || 0)}" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-mocha">PIN Akses Workspace</label>
+                <input id="s-pin" required class="input-lux mt-1" value="${esc(ev.pinCode || '2026')}" />
+              </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-3">
+              <button type="button" onclick="closeModal()" class="btn-outline text-sm">Batal</button>
+              <button type="submit" class="btn-gold text-sm">Simpan Pengaturan</button>
+            </div>
+          </form>
+        `);
+      };
+      window.submitEventSettings = function (e) {
+        e.preventDefault();
+        state.event.groomName = document.getElementById('s-groom').value.trim();
+        state.event.brideName = document.getElementById('s-bride').value.trim();
+        state.event.weddingDate = document.getElementById('s-date').value;
+        state.event.akadTime = document.getElementById('s-akad').value.trim();
+        state.event.resepsiTime = document.getElementById('s-resepsi').value.trim();
+        state.event.venueName = document.getElementById('s-venue').value.trim();
+        state.event.venueAddress = document.getElementById('s-addr').value.trim();
+        state.event.budgetCeiling = Number(document.getElementById('s-ceiling').value || 0);
+        state.event.pinCode = document.getElementById('s-pin').value.trim() || '2026';
+        saveState('Memperbarui pengaturan acara & PIN');
+        closeModal();
+        showToast('Pengaturan acara diperbarui!');
+      };
+
+      window.openCloudSetupModal = function () {
+        openModal(`
+          <h3 class="font-serif text-xl font-semibold mb-2">Cloud Sync (Firebase) &amp; GitHub Pages</h3>
+          <p class="text-xs text-mocha mb-4">Hubungkan ke Firebase Realtime Database agar data Fajar &amp; Selviana tersinkron otomatis lintas jaringan/HP secara real-time.</p>
+          <form onsubmit="submitCloudConfig(event)" class="space-y-3">
+            <div>
+              <label class="text-xs font-semibold text-mocha">Workspace ID</label>
+              <input id="c-ws" required class="input-lux mt-1" value="${esc(cloudConfig.workspaceId || 'fajar-selviana-2026')}" />
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-mocha">Firebase Realtime Database URL (atau tempel firebaseConfig)</label>
+              <textarea id="c-url" rows="3" placeholder="Contoh: https://wedding-fajar-selvi-default-rtdb.firebaseio.com" class="input-lux mt-1">${esc(cloudConfig.databaseURL || '')}</textarea>
+              <p class="text-[11px] text-mocha mt-1">Bisa langsung tempel URL RTDB atau seluruh blok <code>firebaseConfig</code> dari Firebase Console.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-ivory border border-sand text-xs text-mocha space-y-1">
+              <div class="font-semibold text-espresso">Panduan Singkat GitHub Pages:</div>
+              <div>1. Pastikan nama file di repository GitHub Anda adalah <strong>index.html</strong> (bukan nama lain).</div>
+              <div>2. Aktifkan <strong>Settings → Pages → Branch: main / (root)</strong>.</div>
+              <div>3. Klik tombol <strong>Download index.html</strong> di bawah untuk mendapatkan file yang sudah tertanam konfigurasi cloud Anda.</div>
+            </div>
+            <div class="flex flex-wrap justify-between gap-2 pt-2">
+              <button type="button" onclick="downloadConfiguredHtml()" class="btn-outline text-xs">⬇ Download index.html (Siap GitHub)</button>
+              <div class="flex gap-2">
+                <button type="button" onclick="closeModal()" class="btn-outline text-sm">Tutup</button>
+                <button type="submit" class="btn-gold text-sm">Simpan &amp; Hubungkan</button>
+              </div>
+            </div>
+          </form>
+        `);
+      };
+
+      function parseDatabaseUrlInput(raw) {
+        const text = (raw || '').trim();
+        if (!text) return '';
+        const match = text.match(/https:\/\/[a-zA-Z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)/);
+        if (match) return match[0];
+        return text.replace(/\/+$/, '');
+      }
+
+      window.submitCloudConfig = async function (e) {
+        e.preventDefault();
+        const ws = document.getElementById('c-ws').value.trim() || 'fajar-selviana-2026';
+        const dbUrl = parseDatabaseUrlInput(document.getElementById('c-url').value);
+        cloudConfig = { workspaceId: ws, databaseURL: dbUrl };
+        localStorage.setItem(CLOUD_CFG_KEY, JSON.stringify(cloudConfig));
+        closeModal();
+        if (dbUrl) {
+          showToast('Menghubungkan ke Firebase Cloud...');
+          startCloudSync();
+        } else {
+          stopCloudSync();
+          updateSyncBadge(false, 'Mode Lokal (Offline)');
+          showToast('Beralih ke Mode Lokal.');
+        }
+      };
+
+      window.downloadConfiguredHtml = function () {
+        const ws = document.getElementById('c-ws').value.trim() || 'fajar-selviana-2026';
+        const dbUrl = parseDatabaseUrlInput(document.getElementById('c-url').value);
+        cloudConfig = { workspaceId: ws, databaseURL: dbUrl };
+        localStorage.setItem(CLOUD_CFG_KEY, JSON.stringify(cloudConfig));
+
+        const docClone = document.documentElement.cloneNode(true);
+        const cfgTag = docClone.querySelector('#embedded-cloud-config');
+        if (cfgTag) {
+          cfgTag.textContent = JSON.stringify({ databaseURL: dbUrl, workspaceId: ws }, null, 2);
+        }
+        // Reset tampilan clone agar bersih saat dibuka dari awal
+        const lg = docClone.querySelector('#login-gate');
+        const sh = docClone.querySelector('#app-shell');
+        const pv = docClone.querySelector('#public-invitation-view');
+        if (lg) lg.classList.remove('hidden');
+        if (sh) sh.classList.add('hidden');
+        if (pv) pv.classList.add('hidden');
+
+        const finalHtml = '<!DOCTYPE html>\n' + docClone.outerHTML;
+        const blob = new Blob([finalHtml], { type: 'text/html;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'index.html';
+        a.click();
+        URL.revokeObjectURL(a.href);
+        showToast('File index.html siap upload ke GitHub Pages berhasil diunduh!');
+      };
+
+      window.exportJSON = function () {
+        const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `backup-wedding-fajar-selviana-${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+        showToast('Backup JSON berhasil diunduh.');
+      };
+
+      window.importJSON = function (event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          try {
+            const parsed = JSON.parse(ev.target.result);
+            const def = createDefaultData();
+            state = { ...def, ...parsed, event: { ...def.event, ...(parsed.event || {}) } };
+            saveState('Mengimpor backup data JSON');
+            showToast('Data JSON berhasil diimpor!');
+          } catch (err) {
+            showToast('File JSON tidak valid.');
+          }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
+      };
+
+      window.resetDefaultData = function () {
+        if (!confirm('Kembalikan seluruh data ke contoh awal?')) return;
+        state = createDefaultData();
+        saveState('Mereset data ke default awal');
+        showToast('Data dikembalikan ke default.');
+      };
+
+      // ==================== MODAL HELPERS ====================
+      window.openModal = function (html) {
+        document.getElementById('modal-box').innerHTML = html;
+        document.getElementById('modal-root').classList.remove('hidden');
+      };
+      window.closeModal = function () {
+        document.getElementById('modal-root').classList.add('hidden');
+        document.getElementById('modal-box').innerHTML = '';
+      };
+
+      // ==================== BOOTSTRAP ====================
+      function initApp() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('undangan') === '1') {
+          enterPublicInviteMode();
+          return;
+        }
+        try {
+          const savedSession = localStorage.getItem(SESSION_KEY);
+          if (savedSession) {
+            const s = JSON.parse(savedSession);
+            if (s && s.user && String(s.pin) === String(state.event.pinCode || '2026')) {
+              currentUser = s.user;
+              enterAppShell();
+              return;
+            }
+          }
+        } catch (e) {}
+        document.getElementById('login-gate').classList.remove('hidden');
+        startCloudSync();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+      } else {
+        initApp();
+      }
+    })();
+  </script>
+</body>
+</html>
